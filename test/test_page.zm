@@ -55,82 +55,27 @@ Page test_page
             init()
             {
                 fill_pattern_color = TEST_PAGE_STIMULUS_COLOR;
-                size = 450, 100;
-                offset_x = width / 2;
-                offset_y = height / 2;
+                size = 1280, 720;
+                // offset_x = width / 2;
+                // offset_y = height / 2;
             }
 
-
-            CrossShape fixation
+            ImageShape cue
             {
                 init()
                 {
-                    radius = 15;
-                    line_width = 5;
-                    line_pattern_color = color:crimson;
+                    width = 1280;
+                    height = 720;
                 }
             }
 
 
-            TextShape stimulus
+            ImageShape stimulus
             {
                 init()
                 {
-                    font_family = TEST_PAGE_STIMULUS_FONT_FAMILY;
-                    font_size = TEST_PAGE_STIMULUS_FONT_SIZE;
-                    line_pattern_color = TEST_PAGE_STIMULUS_TEXT_COLOR;
-                    hor_alignment = ALIGN_CENTER;
-                    ver_alignment = ALIGN_CENTER;
-                }
-            }
-        }
-
-
-        HorizontalLayout buttons
-        {
-            init()
-            {
-                spacing = 50;
-                options = LAYOUT_EQUAL_WIDTH;
-            }
-
-
-            ButtonGadget button1
-            {
-                init()
-                {
-                    text = NO_BUTTON_TEXT;
-                    font_family = TEST_PAGE_BUTTON_FONT_FAMILY;
-                    font_size = TEST_PAGE_BUTTON_FONT_SIZE;
-                    fill_pattern_color = TEST_PAGE_BUTTON_COLOR;
-                    text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
-                    size = 150, 75;
-                }
-
-
-                on_event:activate()
-                {
-                    response.process_hit(RESPONSE_NO, event_time);
-                }
-            }
-
-
-            ButtonGadget button2
-            {
-                init()
-                {
-                    text = YES_BUTTON_TEXT;
-                    font_family = TEST_PAGE_BUTTON_FONT_FAMILY;
-                    font_size = TEST_PAGE_BUTTON_FONT_SIZE;
-                    fill_pattern_color = TEST_PAGE_BUTTON_COLOR;
-                    text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
-                    size = 150, 75;
-                }
-
-
-                on_event:activate()
-                {
-                    response.process_hit(RESPONSE_YES, event_time);
+                    width = 1280;
+                    height = 720;
                 }
             }
         }
@@ -138,15 +83,18 @@ Page test_page
 
         time start_stimulus(time t)
         {
+            //
+            canvas.cue.image = stimuli_dir() + "images/" + item.cue_fn;
+
             // Prepare stimulus presentation object.
-            canvas.stimulus.text = item.word;
+            canvas.stimulus.image = stimuli_dir() + "images/" + item.stim_fn;
 
             // Start fixation cross.
-            canvas.fixation.start(t, FIXATION_DURATION);
-            time fixoffset = canvas.fixation.expected_finish_time;
+            canvas.cue.start(t, CUE_DURATION);
+            time cueoffset = canvas.cue.expected_finish_time;
 
             // Start stimulus at fixation offset.
-            canvas.stimulus.start(fixoffset, STIMULUS_DURATION);
+            canvas.stimulus.start(cueoffset, STIMULUS_DURATION);
 
             // Return stimulus onset time.
             return canvas.stimulus.expected_start_time;
@@ -158,6 +106,7 @@ Page test_page
             full_abort();
 
             canvas.stimulus.is_visible = false;
+            canvas.cue.is_visible = false;
         }
     }
 
@@ -165,14 +114,16 @@ Page test_page
     Response response
     {
         // Response data.
-        int     value;          // response value: 0=no, 1=yes, -1=timeout
-        int     rt;             // response time [ms]
-        int     correct;        // correct response: 0=no, 1=yes, -1=n.a.
+        int             value;          // response value: 0=left button, 1=right button, -1=timeout
+        ResponseType    chosen_resp;
+        int             rt;             // response time [ms]
+        int             correct;        // correct response: 0=no, 1=yes, -1=n.a.
 
 
         void clear()
         {
             value = -1;
+            chosen_resp = NO_RESP;
             rt = -9999;
             correct = -1;
         }
@@ -187,10 +138,18 @@ Page test_page
             if (validity == HIT_VALID)
             {
                 value = val;
+                if (value == 0)
+                    chosen_resp = item.resp_left;
+                if (value == 1)
+                    chosen_resp = item.resp_right;
+
+                if (item.type == SORT_BY_SHAPE && chosen_resp == RESP_SHAPE ||
+                    item.type == SORT_BY_COLOR && chosen_resp == RESP_COLOR)
+                    correct = true;
+                else
+                    correct = false;
+
                 rt = int(reaction_time(0));
-                correct =
-                    (item.type != NON_WORD && val == RESPONSE_YES) ||
-                    (item.type == NON_WORD && val == RESPONSE_NO);
 
                 ignore_remaining_hits();
 
@@ -308,7 +267,7 @@ Page test_page
         control.set_status(
             string(item.id) + "  " +
             string(item.type) + "  " +
-            string(item.word));
+            string(item.stim_fn));
 
 
         // Remember who to signal when the trial is over.

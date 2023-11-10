@@ -12,6 +12,7 @@ the item table(s) i.e. stimulus information.
 HISTORY:
 2011-10-25 TV   Created.
 2017-01-09 TV   Adapted for Zep 2.0.
+2017-01-09 MD   Adapted for DCCS
 
 \******************************************************************************/
 
@@ -19,17 +20,30 @@ HISTORY:
 // Symbolic definition of item type.
 enum ItemType
 {
-    NON_WORD,                   // non-word
-    REAL_WORD,                  // real word
+    NOT_YET_APPLIED,                 // Temp invalid initialization value
+    SORT_BY_COLOR,                   // non-word
+    SORT_BY_SHAPE,                   // real word
+}
+
+// Whether the participant selects by color or by shape
+enum ResponseType
+{
+    NO_RESP,
+    RESP_COLOR,
+    RESP_SHAPE,
 }
 
 
 // Item table record.
 record TestItem
 {
-    int         id;             // item id
-    ItemType    type;           // item type
-    string      word;           // stimulus word
+    int             id;             // item id
+    string          phase;          // phase of the stimulus e.g prac, preswitch, postswitch
+    ItemType        type;           // item type
+    string          cue_fn;         // image file name for cue 
+    string          stim_fn;        // image file name for stimulus
+    ResponseType    resp_left;      // left button corresponds with: 
+    ResponseType    resp_right;     // right button corresponds with: 
 }
 
 
@@ -37,22 +51,34 @@ record TestItem
 //   index: item number
 TestItem[] prac_items =
 {
-    {1,         NON_WORD,       "palve"},
-    {2,         REAL_WORD,      "hot"},
+    {1, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+    {2, "prac", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR},
+    {3, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
 }
 
 
-// Test item table.
+// preswitch item table.
 //   index: item number
-TestItem[] test_items =
+TestItem[] preswitch_items =
 {
-    {1,         NON_WORD,       "slirque"},
-    {2,         NON_WORD,       "crawse"},
-    {3,         NON_WORD,       "thwurp"},
-    {4,         NON_WORD,       "clem"},
-
-    {5,         REAL_WORD,      "white"},
-    {6,         REAL_WORD,      "travel"},
-    {7,         REAL_WORD,      "letter"},
-    {8,         REAL_WORD,      "clown"},
+    {1, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+    {2, "preswitch", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR},
+    {3, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
 }
+
+// postswitch item table.
+//   index: item number
+TestItem[] postswitch_items =
+{
+    {1, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+    {2, "postswitch", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR},
+    {3, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+}
+
+TestItem[] mixed_items =
+{
+    {1, "mixed", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+    {2, "mixed", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR},
+    {3, "mixed", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+}
+

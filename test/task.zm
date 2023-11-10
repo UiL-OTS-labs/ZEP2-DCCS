@@ -139,7 +139,7 @@ Block task
     }
 
 
-    Block test
+    Block preswitch
     {
         TestItem        item;   // current item
 
@@ -147,10 +147,9 @@ Block task
         on_event:entry()
         {
             // Randomize test item table.
-            if (shuffle_test_items() != OK) terminate;
+            if (shuffle_preswitch_items() != OK) terminate;
 
-            num_cycles = test_items.size;
-//            num_cycles = 3;
+            num_cycles = preswitch_items.size;
 
             // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
@@ -170,9 +169,9 @@ Block task
         {
             on_event:entry()
             {
-                item = test_items[test.cycle];
+                item = preswitch_items[preswitch.cycle];
 
-                test_page.action(this, item, reference_time, test.cycle);
+                test_page.action(this, item, reference_time, preswitch.cycle);
             }
 
 
@@ -180,10 +179,10 @@ Block task
             {
                 // Add new row to test output table.
                 TestOutput output;
-                output.trialnum = test.cycle + 1;
+                output.trialnum = preswitch.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
-                output.word = item.word;
+                // output.word = item.word;
                 output.value = test_page.response.value;
                 output.rt = test_page.response.rt;
                 output.correct = test_page.response.correct;

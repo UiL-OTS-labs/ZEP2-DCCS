@@ -15,9 +15,31 @@ HISTORY:
 
 
 // Shuffles test_items table (no restrictions on item order).
-int shuffle_test_items()
+int shuffle_prac_items()
 {
-    test_items.shuffle(0, -1);
+    prac_items.shuffle(0, -1);
 
     return OK;
 }
+
+int shuffle_preswitch_items()
+{
+    preswitch_items.shuffle(0, -1);
+
+    return OK;
+}
+
+int shuffle_postswitch_items()
+{
+    postswitch_items.shuffle(0, -1);
+
+    return OK;
+}
+
+int shuffle_mixed_items()
+{
+    mixed_items.shuffle(0, -1);
+
+    return OK;
+}
+

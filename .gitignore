@@ -1,1 +1,10 @@
 articles
+
+# db folder
+/db
+
+# output
+/*.csv
+
+# vim tempfiles
+*.sw[op]

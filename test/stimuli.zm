@@ -44,6 +44,9 @@ record TestItem
     string          stim_fn;        // image file name for stimulus
     ResponseType    resp_left;      // left button corresponds with: 
     ResponseType    resp_right;     // right button corresponds with: 
+    bool            paint_square;   // whether or not to present a square
+                                    // around the stimulus
+    string          soundfile;      // soundfile to play or "" empty for no file
 }
 
 
@@ -51,9 +54,9 @@ record TestItem
 //   index: item number
 TestItem[] prac_items =
 {
-    {1, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
-    {2, "prac", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR},
-    {3, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+    {1, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
+    {2, "prac", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
+    {3, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
 
 
@@ -61,24 +64,24 @@ TestItem[] prac_items =
 //   index: item number
 TestItem[] preswitch_items =
 {
-    {1, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
-    {2, "preswitch", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR},
-    {3, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+    {1, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
+    {2, "preswitch", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
+    {3, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
 
 // postswitch item table.
 //   index: item number
 TestItem[] postswitch_items =
 {
-    {1, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
-    {2, "postswitch", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR},
-    {3, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+    {1, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
+    {2, "postswitch", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
+    {3, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
 
 TestItem[] mixed_items =
 {
-    {1, "mixed", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
-    {2, "mixed", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR},
-    {3, "mixed", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE},
+    {1, "mixed", SORT_BY_COLOR, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, true, "color.wav"},
+    {2, "mixed", SORT_BY_SHAPE, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, "shape.wav"},
+    {3, "mixed", SORT_BY_COLOR, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, true, "color.wav"},
 }
 

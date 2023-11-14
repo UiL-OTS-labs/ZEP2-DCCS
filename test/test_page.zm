@@ -59,7 +59,7 @@ Page test_page
                 // offset_x = width / 2;
                 // offset_y = height / 2;
             }
-
+            
             ImageShape cue
             {
                 init()
@@ -78,6 +78,20 @@ Page test_page
                     height = 720;
                 }
             }
+            RectangleShape rect
+            {
+                init()
+                {
+                    line_width = 25;
+                    width = 1280 - line_width;
+                    height = 720 - line_width;
+                    offset_x = line_width/2;
+                    offset_y = line_width/2;
+                    line_pattern_color = color:black;
+                }
+            }
+
+            
         }
 
 
@@ -89,12 +103,19 @@ Page test_page
             // Prepare stimulus presentation object.
             canvas.stimulus.image = stimuli_dir() + "images/" + item.stim_fn;
 
-            // Start fixation cross.
+            // optionally display rectangle
+            if (item.paint_square) {
+                println("painting rect");
+                canvas.rect.start(t, -1ms);
+            }
+
+            // Start cue.
             canvas.cue.start(t, CUE_DURATION);
             time cueoffset = canvas.cue.expected_finish_time;
 
             // Start stimulus at fixation offset.
             canvas.stimulus.start(cueoffset, STIMULUS_DURATION);
+
 
             // Return stimulus onset time.
             return canvas.stimulus.expected_start_time;
@@ -107,6 +128,7 @@ Page test_page
 
             canvas.stimulus.is_visible = false;
             canvas.cue.is_visible = false;
+            canvas.rect.is_visible = false;
         }
     }
 

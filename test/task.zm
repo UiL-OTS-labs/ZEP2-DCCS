@@ -29,8 +29,13 @@ import instructions;
 
 bool skip_mixed()
 {
-    // TODO determine whether we should skip the mixed block (young infants).
-    return false;
+    bool ret;
+    if (selected_group == OLD)
+        ret = false;
+    else
+        ret = true;
+
+    return ret;
 }
 
 Block task

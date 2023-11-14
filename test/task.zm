@@ -1,29 +1,20 @@
 /******************************************************************************\
 FILE:           task.zm
-AUTHOR:         Theo Veenker <theo.veenker@beexy.nl>
+AUTHOR:         
 ADAPTED BY:     -
 
 DESCRIPTION:
 
-Visual Lexical Decision
+Dimensional Card Change Sort
 
 
 Global structure of this experiment phase:
 
   - instructions
 
-  - practice part
-      trial
-
-  - pause
-
-  - test part
-      trial
 
 
 HISTORY:
-2011-10-25 TV   Created.
-2017-01-09 TV   Adapted for Zep 2.0.
 
 \******************************************************************************/
 
@@ -34,41 +25,23 @@ import stimuli;
 import shuffle;
 import output;
 import test_page;
+import instructions;
 
+bool skip_mixed()
+{
+    // TODO determine whether we should skip the mixed block (young infants).
+    return false;
+}
 
 Block task
 {
-    Part instructions
+    Part instructions_1
     {
         on_event:entry()
         {
 //            pause_page.set_text_size(1000, 600);
             pause_page.set_text(
-                "<b>Dear participant,</b>\n"
-                "\n"
-                "Thank you for participating in this experiment.\n"
-                "\n"
-                "You are now going to see words on the screen, one after the "
-                "other. Your task is to indicate for each word as quickly as "
-                "possible whether you think the word is <i>a real word or "
-                "not</i>. Try to make no mistakes.\n"
-                "\n"
-
-                "To respond, hit the left button on the button-box for "
-                "<i>No</i> and the right button for <i>Yes</i>.\n"
-
-//                "To respond, hit the left shift key for <i>No</i> and the "
-//                "right shift key for <i>Yes</i>.\n"
-
-//                "To respond, hit the left button on the button-box for "
-//                "<i>No</i> and the right button for <i>Yes</i>. "
-//                "Alternatively you can use the left or right shift keys.\n"
-
-                "\n"
-                "First we will do a short practice.\n"
-                "\n"
-//                "<i>Hit Enter when ready to start.</i>",
-                "<i>Hit any button on the button-box when ready to start.</i>",
+                PRE_PRAC_INSTRUCTION,
                 true);
 
             pause_page.action(this);
@@ -87,7 +60,7 @@ Block task
             num_cycles = prac_items.size;
 
             // Prepare test page: progress bar, feedback and prompt enabled.
-            test_page.setup(num_cycles, true, true);
+            test_page.setup(num_cycles, true, false);
         }
 
 
@@ -123,22 +96,14 @@ Block task
         on_event:entry()
         {
             pause_page.set_text(
-                "End of the practice part.\n"
-                "\n"
-                "If you have any questions at this moment please ask the "
-                "experimenter now.\n"
-                "\n"
-//                "<i>Hit Enter when ready to proceed.</i>",
-                "<i>Hit any button on the button-box when ready to "
-                "proceed.</i>",
+                PRE_SWITCH_INSTRUCTION,
                 true);
 
             pause_page.action(this);
             control.enable_all_buttons();
         }
     }
-
-
+    
     Block preswitch
     {
         TestItem        item;   // current item
@@ -199,6 +164,162 @@ Block task
             blank_page.action_auto(this, 500ms);
         }
     }
+    
+    Part pause_post_switch
+    {
+        on_event:entry()
+        {
+            pause_page.set_text(
+                POST_SWITCH_INSTRUCTION,
+                true);
+
+            pause_page.action(this);
+            control.enable_all_buttons();
+        }
+    }
+    
+    Block postswitch
+    {
+        TestItem        item;   // current item
+
+
+        on_event:entry()
+        {
+            // Randomize test item table.
+            if (shuffle_postswitch_items() != OK) terminate;
+
+            num_cycles = postswitch_items.size;
+
+            // Prepare test page: progress bar enabled, feedback and prompt
+            // disabled.
+            test_page.setup(num_cycles, false, false);
+        }
+
+
+        on_event:exit()
+        {
+            test_page.cleanup();
+
+            save_trial_data();
+        }
+
+
+        Trial trial
+        {
+            on_event:entry()
+            {
+                item = postswitch_items[postswitch.cycle];
+
+                test_page.action(this, item, reference_time, postswitch.cycle);
+            }
+
+
+            on_event:exit()
+            {
+                // Add new row to test output table.
+                TestOutput output;
+                output.trialnum = postswitch.cycle + 1;
+                output.id = item.id;
+                output.type = item.type;
+                // output.word = item.word;
+                output.value = test_page.response.value;
+                output.rt = test_page.response.rt;
+                output.correct = test_page.response.correct;
+                test_output_append(output);
+            }
+        }
+    }
+
+
+    Part
+    {
+        on_event:entry()
+        {
+            blank_page.action_auto(this, 500ms);
+        }
+    }
+
+    TransientPart test_mixed
+    {
+        on_event:entry()
+        {
+            if (skip_mixed()) {
+                final_blank.enter();
+            }
+        }
+    }
+    
+    
+    Part pause_mixed
+    {
+        on_event:entry()
+        {
+            pause_page.set_text(
+                MIXED_INSTRUCTION,
+                true);
+
+            pause_page.action(this);
+            control.enable_all_buttons();
+        }
+    }
+    
+    Block mixed
+    {
+        TestItem        item;   // current item
+
+        on_event:entry()
+        {
+            // Randomize test item table.
+            if (shuffle_mixed_items() != OK) terminate;
+
+            num_cycles = mixed_items.size;
+
+            // Prepare test page: progress bar enabled, feedback and prompt
+            // disabled.
+            test_page.setup(num_cycles, false, false);
+        }
+
+        on_event:exit()
+        {
+            test_page.cleanup();
+
+            save_trial_data();
+        }
+
+        Trial trial
+        {
+            on_event:entry()
+            {
+                item = mixed_items[mixed.cycle];
+
+                test_page.action(this, item, reference_time, mixed.cycle);
+            }
+
+            on_event:exit()
+            {
+                // Add new row to test output table.
+                TestOutput output;
+                output.trialnum = mixed.cycle + 1;
+                output.id = item.id;
+                output.type = item.type;
+                // output.word = item.word;
+                output.value = test_page.response.value;
+                output.rt = test_page.response.rt;
+                output.correct = test_page.response.correct;
+                test_output_append(output);
+            }
+        }
+    }
+    
+    Part final_blank
+    {
+        on_event:entry()
+        {
+            blank_page.action_auto(this, 500ms);
+        }
+    }
+
+
 }
 
 

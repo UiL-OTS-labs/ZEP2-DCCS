@@ -1,0 +1,6 @@
+
+
+const string PRE_PRAC_INSTRUCTION = "<b>instructie voor oefen gedeelte,</b>\n";
+const string PRE_SWITCH_INSTRUCTION = "<b>instructie voor het PRE_SWITCH_BLOCK,</b>\n";
+const string POST_SWITCH_INSTRUCTION = "<b>instructie voor het POST_SWITCH_BLOCK,</b>\n";
+const string MIXED_INSTRUCTION = "<b>instructie voor het MIXED block,</b>\n";

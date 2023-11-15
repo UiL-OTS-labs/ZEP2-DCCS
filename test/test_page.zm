@@ -15,6 +15,7 @@ HISTORY:
 
 \******************************************************************************/
 
+import std_sound_output_device;
 
 // Symbolic definition of possible responses.
 enum TestEvent {
@@ -22,24 +23,20 @@ enum TestEvent {
     RESPONSE_YES        = 1,
 }
 
-
 Page test_page
 {
     TestItem    item;           // trial control parameters
-
 
     init()
     {
         fill_pattern_color = TEST_PAGE_COLOR;
     }
 
-
     on_event:message()
     {
         // Process response box message. See setup() below.
         response.process_hit(message_arg, event_time);
     }
-
 
     VerticalLayout layout
     {
@@ -48,7 +45,6 @@ Page test_page
             spacing = 50;
             height = 0;     // 0 means as large as possible
         }
-
 
         CanvasGadget canvas
         {
@@ -69,7 +65,6 @@ Page test_page
                 }
             }
 
-
             ImageShape stimulus
             {
                 init()
@@ -78,6 +73,7 @@ Page test_page
                     height = 720;
                 }
             }
+
             RectangleShape rect
             {
                 init()
@@ -90,10 +86,7 @@ Page test_page
                     line_pattern_color = color:black;
                 }
             }
-
-            
         }
-
 
         time start_stimulus(time t)
         {
@@ -105,7 +98,6 @@ Page test_page
 
             // optionally display rectangle
             if (item.paint_square) {
-                println("painting rect");
                 canvas.rect.start(t, -1ms);
             }
 
@@ -132,6 +124,25 @@ Page test_page
         }
     }
 
+    SoundPlayback sound_cue
+    {
+
+        SoundFile clip {}
+
+
+        void play(time t)
+        {
+            abort();
+
+            sound_cue.device = sound_output_device;
+
+            if (item.soundfile != "") {
+                clip.file = stimuli_dir() + "sounds/" + item.soundfile;
+                start(t);
+            }
+        }
+
+    }
 
     Response response
     {
@@ -212,6 +223,8 @@ Page test_page
         signal_target(msgid);   // tell caller we're done
         target = null;
 
+        sound_cue.abort();
+
         control.clear_status();
     }
 
@@ -275,6 +288,8 @@ Page test_page
         // Start fixation symbol and stimulus.
         time stimonset = layout.start_stimulus(tref);
 
+        // Start sound cue together with offset
+        sound_cue.play(stimonset);
 
         // Response interval starts at stimulus onset. Timeout after
         // RESPONSE_DURATION unless this duration is 0s or less.

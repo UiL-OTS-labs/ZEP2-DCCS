@@ -40,14 +40,36 @@ bool skip_mixed()
 
 Block task
 {
+    TaskOrder order;
+
+    on_event:entry()
+    {
+        int random_number = random(2);
+        if (random_number == 0) {
+            order = COLOR_FIRST;
+        }
+        else if (random_number == 1) {
+            order = SHAPE_FIRST;
+        }
+        else {
+            terminate "Unexpected random number";
+        }
+        setup_order(order);
+    }
+
     Part instructions_1
     {
         on_event:entry()
         {
 //            pause_page.set_text_size(1000, 600);
-            pause_page.set_text(
-                PRE_PRAC_INSTRUCTION,
-                true);
+            if (order == COLOR_FIRST)
+                pause_page.set_text(
+                    PRE_PRAC_INSTRUCTION_COLOR,
+                    true);
+            else
+                pause_page.set_text(
+                    PRE_PRAC_INSTRUCTION_SHAPE,
+                    true);
 
             pause_page.action(this);
             control.enable_all_buttons();
@@ -100,9 +122,14 @@ Block task
     {
         on_event:entry()
         {
-            pause_page.set_text(
-                PRE_SWITCH_INSTRUCTION,
-                true);
+            if (order == COLOR_FIRST)
+                pause_page.set_text(
+                    PRE_SWITCH_INSTRUCTION_COLOR,
+                    true);
+            else
+                pause_page.set_text(
+                    PRE_SWITCH_INSTRUCTION_SHAPE,
+                    true);
 
             pause_page.action(this);
             control.enable_all_buttons();
@@ -174,9 +201,14 @@ Block task
     {
         on_event:entry()
         {
-            pause_page.set_text(
-                POST_SWITCH_INSTRUCTION,
-                true);
+            if (order == COLOR_FIRST)
+                pause_page.set_text(
+                    POST_SWITCH_INSTRUCTION_SHAPE,
+                    true);
+            else
+                pause_page.set_text(
+                    POST_SWITCH_INSTRUCTION_COLOR,
+                    true);
 
             pause_page.action(this);
             control.enable_all_buttons();

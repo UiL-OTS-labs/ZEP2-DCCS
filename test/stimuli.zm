@@ -16,6 +16,10 @@ HISTORY:
 
 \******************************************************************************/
 
+enum TaskOrder {
+    COLOR_FIRST,
+    SHAPE_FIRST
+}
 
 // Symbolic definition of item type.
 enum ItemType
@@ -85,3 +89,23 @@ TestItem[] mixed_items =
     {3, "mixed", SORT_BY_COLOR, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, true, "color.wav"},
 }
 
+void
+setup_order(TaskOrder order) {
+    int i = 0;
+    while (i < prac_items.size) {
+        prac_items[i].type = order == COLOR_FIRST ? SORT_BY_COLOR : SORT_BY_SHAPE;
+        i++;
+    }
+
+    i = 0;
+    while (i < preswitch_items.size) {
+        preswitch_items[i].type = order == COLOR_FIRST ? SORT_BY_COLOR : SORT_BY_SHAPE;
+        i++;
+    }
+    
+    i = 0;
+    while (i < postswitch_items.size) {
+        postswitch_items[i].type = order == COLOR_FIRST ? SORT_BY_SHAPE : SORT_BY_COLOR;
+        i++;
+    }
+}

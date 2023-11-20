@@ -1,5 +1,6 @@
-### Preswitch items: ###
+### Preswitch items: ###;;;;;;;;
 id;phase;type;cue_fn;stim_fn;resp_left;resp_right;paint_square;soundfile
 1;preswitch;NOT_YET_APPLIED;c_1.png;s_1.png;RESP_COLOR;RESP_SHAPE;false;
-2;preswitch;NOT_YET_APPLIED;c_2.png;s_2.png;RESP_SHAPE;RESP_COLOR;false;
-3;preswitch;NOT_YET_APPLIED;c_1.png;s_1.png;RESP_COLOR;RESP_SHAPE;false;
+2;preswitch;NOT_YET_APPLIED;c_1.png;s_2.png;RESP_SHAPE;RESP_COLOR;false;
+3;preswitch;NOT_YET_APPLIED;c_1.png;s_3.png;RESP_COLOR;RESP_SHAPE;false;
+4;preswitch;NOT_YET_APPLIED;c_1.png;s_4.png;RESP_COLOR;RESP_SHAPE;false;

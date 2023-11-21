@@ -59,7 +59,7 @@ record TestItem
 TestItem[] prac_items =
 {
     {1, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
-    {2, "prac", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
+    {2, "prac", NOT_YET_APPLIED, "c_1.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
     {3, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
 
@@ -69,7 +69,7 @@ TestItem[] prac_items =
 TestItem[] preswitch_items =
 {
     {1, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
-    {2, "preswitch", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
+    {2, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
     {3, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
 
@@ -78,14 +78,14 @@ TestItem[] preswitch_items =
 TestItem[] postswitch_items =
 {
     {1, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
-    {2, "postswitch", NOT_YET_APPLIED, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
+    {2, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
     {3, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
 
 TestItem[] mixed_items =
 {
     {1, "mixed", SORT_BY_COLOR, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, true, "color.wav"},
-    {2, "mixed", SORT_BY_SHAPE, "c_2.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, "shape.wav"},
+    {2, "mixed", SORT_BY_SHAPE, "c_1.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, "shape.wav"},
     {3, "mixed", SORT_BY_COLOR, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, true, "color.wav"},
 }
 

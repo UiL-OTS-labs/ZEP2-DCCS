@@ -74,17 +74,47 @@ Block task
             pause_page.action(this);
             control.enable_all_buttons();
         }
+
     }
 
+    TransientPart skip_redo_instruction
+    {
+        entry() {
+            practice.enter();
+        }
+    }
+
+    Part instructions_prac_redo
+    {
+        on_event:entry()
+        {
+            if (order == COLOR_FIRST)
+                pause_page.set_text(
+                    PRAC_COLOR_REDO,
+                    true);
+            else
+                pause_page.set_text(
+                    PRAC_SHAPE_REDO,
+                    true);
+            
+            pause_page.action(this);
+            control.enable_all_buttons();
+        }
+
+    }
 
     Block practice
     {
         TestItem        item;   // current item
+        int             num_correct;
 
 
         on_event:entry()
         {
             num_cycles = prac_items.size;
+            num_correct = 0;
+
+            shuffle_prac_items();
 
             // Prepare test page: progress bar, feedback and prompt enabled.
             test_page.setup(num_cycles, true, false);
@@ -105,11 +135,38 @@ Block task
 
                 test_page.action(this, item, reference_time, practice.cycle);
             }
+
+            on_event:exit()
+            {
+                TestOutput output;
+                output.trialnum = preswitch.cycle + 1;
+                output.id = item.id;
+                output.type = item.type;
+                // output.word = item.word;
+                output.value = test_page.response.value;
+                output.rt = test_page.response.rt;
+                output.correct = test_page.response.correct;
+
+                if (output.correct) {
+                    num_correct++;
+                }
+            }
         }
     }
 
+    TransientPart test_redo
+    {
+        on_event:entry()
+        {
+            if (practice.num_correct < practice.num_cycles)
+                instructions_prac_redo.enter();
+            else
+                pre_pause_blank.enter();
 
-    Part
+        }
+    }
+
+    Part pre_pause_blank
     {
         on_event:entry()
         {

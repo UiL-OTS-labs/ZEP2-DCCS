@@ -150,7 +150,7 @@ Page test_page
         int             value;          // response value: 0=left button, 1=right button, -1=timeout
         ResponseType    chosen_resp;
         int             rt;             // response time [ms]
-        int             correct;        // correct response: 0=no, 1=yes, -1=n.a.
+        bool            correct;        // correct response: 0=no, 1=yes, -1=n.a.
 
 
         void clear()
@@ -158,7 +158,7 @@ Page test_page
             value = -1;
             chosen_resp = NO_RESP;
             rt = -9999;
-            correct = -1;
+            correct = false;
         }
 
 
@@ -176,8 +176,8 @@ Page test_page
                 if (value == 1)
                     chosen_resp = item.resp_right;
 
-                if (item.type == SORT_BY_SHAPE && chosen_resp == RESP_SHAPE ||
-                    item.type == SORT_BY_COLOR && chosen_resp == RESP_COLOR)
+                if ((item.type == SORT_BY_SHAPE && chosen_resp == RESP_SHAPE) ||
+                    (item.type == SORT_BY_COLOR && chosen_resp == RESP_COLOR))
                     correct = true;
                 else
                     correct = false;

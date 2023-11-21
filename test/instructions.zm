@@ -7,6 +7,13 @@ const string PRE_PRAC_INSTRUCTION_SHAPE =
    M"<b>instructie voor oefen gedeelte</b>\n"
     "Sorteer op vorm.";
 
+const string PRAC_COLOR_REDO = 
+   M"<b>Herhaling oefening</b>\n"
+    "Sorteer op kleur.";
+const string PRAC_SHAPE_REDO = 
+   M"<b>Herhaling oefening</b>\n"
+    "Sorteer op vorm.";
+
 const string PRE_SWITCH_INSTRUCTION_COLOR =
    M"<b>instructie voor het PRE_SWITCH_BLOCK</b>\n"
     "Sorteer op kleur.";

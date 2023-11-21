@@ -288,8 +288,8 @@ Page test_page
         // Start fixation symbol and stimulus.
         time stimonset = layout.start_stimulus(tref);
 
-        // Start sound cue together with offset
-        sound_cue.play(stimonset);
+        // Start sound cue together with fix cross stimulus
+        sound_cue.play(tref);
 
         // Response interval starts at stimulus onset. Timeout after
         // RESPONSE_DURATION unless this duration is 0s or less.

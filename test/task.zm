@@ -183,14 +183,26 @@ Block task
     {
         on_event:entry()
         {
-            if (order == COLOR_FIRST)
-                pause_page.set_text(
-                    PRE_SWITCH_INSTRUCTION_COLOR,
-                    true);
-            else
-                pause_page.set_text(
-                    PRE_SWITCH_INSTRUCTION_SHAPE,
-                    true);
+            if (selected_group == YOUNG) {
+                if (order == COLOR_FIRST)
+                    pause_page.set_text(
+                        PRE_SWITCH_INSTRUCTION_COLOR_Y,
+                        true);
+                else
+                    pause_page.set_text(
+                        PRE_SWITCH_INSTRUCTION_SHAPE_Y,
+                        true);
+            }
+            else {
+                if (order == COLOR_FIRST)
+                    pause_page.set_text(
+                        PRE_SWITCH_INSTRUCTION_COLOR_O,
+                        true);
+                else
+                    pause_page.set_text(
+                        PRE_SWITCH_INSTRUCTION_SHAPE_O,
+                        true);
+            }
 
             pause_page.action(this);
             control.enable_all_buttons();
@@ -262,14 +274,30 @@ Block task
     {
         on_event:entry()
         {
-            if (order == COLOR_FIRST)
-                pause_page.set_text(
-                    POST_SWITCH_INSTRUCTION_SHAPE,
-                    true);
-            else
-                pause_page.set_text(
-                    POST_SWITCH_INSTRUCTION_COLOR,
-                    true);
+            if (selected_group == YOUNG) {
+                if (order == COLOR_FIRST) {
+                    pause_page.set_text(
+                        POST_SWITCH_INSTRUCTION_SHAPE_Y,
+                        true);
+                }
+                else {
+                    pause_page.set_text(
+                        POST_SWITCH_INSTRUCTION_COLOR_Y,
+                        true);
+                }
+            }
+            else {
+                if (order == COLOR_FIRST) {
+                    pause_page.set_text(
+                        POST_SWITCH_INSTRUCTION_SHAPE_O,
+                        true);
+                }
+                else {
+                    pause_page.set_text(
+                        POST_SWITCH_INSTRUCTION_COLOR_O,
+                        true);
+                }
+            }
 
             pause_page.action(this);
             control.enable_all_buttons();

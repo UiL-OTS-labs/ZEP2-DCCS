@@ -1,31 +1,44 @@
 
-
 const string PRE_PRAC_INSTRUCTION_COLOR =
-   M"<b>instructie voor oefen gedeelte</b>\n"
-    "Sorteer op kleur.";
+   M"In welk bakje hoort het middelste vormpje?\n"
+    "Links of rechts?\n"
+    "Kijk naar de kleur.";
 const string PRE_PRAC_INSTRUCTION_SHAPE =
-   M"<b>instructie voor oefen gedeelte</b>\n"
-    "Sorteer op vorm.";
+   M"In welk bakje hoort het middelste vormpje?\n"
+    "Links of rechts?\n"
+    "Kijk naar de vorm.";
 
-const string PRAC_COLOR_REDO = 
-   M"<b>Herhaling oefening</b>\n"
-    "Sorteer op kleur.";
-const string PRAC_SHAPE_REDO = 
-   M"<b>Herhaling oefening</b>\n"
-    "Sorteer op vorm.";
+const string PRAC_COLOR_REDO = PRE_PRAC_INSTRUCTION_COLOR;
+const string PRAC_SHAPE_REDO = PRE_PRAC_INSTRUCTION_SHAPE;
 
-const string PRE_SWITCH_INSTRUCTION_COLOR =
-   M"<b>instructie voor het PRE_SWITCH_BLOCK</b>\n"
-    "Sorteer op kleur.";
-const string PRE_SWITCH_INSTRUCTION_SHAPE =
-   M"<b>instructie voor het PRE_SWITCH_BLOCK</b>\n"
-    "Sorteer op vorm.";
+const string PRE_SWITCH_INSTRUCTION_COLOR_Y =
+   M"Kijk naar de kleur.";
+const string PRE_SWITCH_INSTRUCTION_SHAPE_Y =
+   M"Kijk naar de vorm.";
 
-const string POST_SWITCH_INSTRUCTION_COLOR =
-   M"<b>instructie voor het POST_SWITCH_BLOCK</b>\n"
-    "Sorteer op kleur";
-const string POST_SWITCH_INSTRUCTION_SHAPE =
-   M"<b>instructie voor het POST_SWITCH_BLOCK,</b>\n"
-    "Sorteer op vorm";
+const string PRE_SWITCH_INSTRUCTION_COLOR_O =
+   M"Sorteer de vormpjes naar kleur.";
+const string PRE_SWITCH_INSTRUCTION_SHAPE_O =
+   M"Sorteer de vormpjes naar vorm.";
 
-const string MIXED_INSTRUCTION = "<b>Instructie voor het MIXED block,</b>\n";
+const string POST_SWITCH_INSTRUCTION_COLOR_Y =
+   M"De regels zijn nu anders.\n"
+    "Kijk nu naar de kleur.";
+const string POST_SWITCH_INSTRUCTION_SHAPE_Y =
+   M"De regels zijn nu anders.\n"
+    "Kijk nu naar de vorm.";
+    
+const string POST_SWITCH_INSTRUCTION_COLOR_O =
+   M"De regels zijn nu anders.\n"
+    "Sorteer de vormpjes naar de kleur.";
+
+const string POST_SWITCH_INSTRUCTION_SHAPE_O =
+   M"De regels zijn nu anders.\n"
+    "Sorteer de vormpjes naar de vorm.";
+
+const string MIXED_INSTRUCTION =
+   M"Nu gaan de regels door elkaar.\n"
+    "Hoor je 'kleur' en zie je een zwarte rand?"
+    "Dan sorteer je de vormpjes naar kleur.\n"
+    "Hoor je vorm en zie je geen zwarte rand?\n"
+    "Dan sorteer je naar vorm.";

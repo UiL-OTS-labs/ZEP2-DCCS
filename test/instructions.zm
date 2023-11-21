@@ -38,7 +38,7 @@ const string POST_SWITCH_INSTRUCTION_SHAPE_O =
 
 const string MIXED_INSTRUCTION =
    M"Nu gaan de regels door elkaar.\n"
-    "Hoor je 'kleur' en zie je een zwarte rand?"
+    "Hoor je 'kleur' en zie je een zwarte rand?\n"
     "Dan sorteer je de vormpjes naar kleur.\n"
     "Hoor je vorm en zie je geen zwarte rand?\n"
     "Dan sorteer je naar vorm.";

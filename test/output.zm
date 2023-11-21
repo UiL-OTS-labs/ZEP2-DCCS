@@ -23,6 +23,8 @@ record TestOutput
 {
     int         trialnum;       // trial number
 
+    string      phase;          // phase: prac, preswitch etc.
+
     int         id;             // item id
     ItemType    type;           // item type
     string      word;           // stimulus word
@@ -48,6 +50,9 @@ void test_output_append(TestOutput data)
     // arguments) are optional but recommended.
 
     expdb.set_trial_data_int_field("trialnum", data.trialnum,
+        "trial number");
+    
+    expdb.set_trial_data_string_field("phase", data.phase,
         "trial number");
 
     expdb.set_trial_data_int_field("id", data.id,

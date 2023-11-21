@@ -44,6 +44,10 @@ Block task
 
     on_event:entry()
     {
+        int ret = load_stimuli();
+        if (ret != OK)
+            terminate "Unable to load stimuli.";
+
         int random_number = random(2);
         if (random_number == 0) {
             order = COLOR_FIRST;

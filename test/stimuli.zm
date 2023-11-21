@@ -58,35 +58,22 @@ record TestItem
 //   index: item number
 TestItem[] prac_items =
 {
-    {1, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
-    {2, "prac", NOT_YET_APPLIED, "c_1.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
-    {3, "prac", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
-
 
 // preswitch item table.
 //   index: item number
 TestItem[] preswitch_items =
 {
-    {1, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
-    {2, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
-    {3, "preswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
 
 // postswitch item table.
 //   index: item number
 TestItem[] postswitch_items =
 {
-    {1, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
-    {2, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, ""},
-    {3, "postswitch", NOT_YET_APPLIED, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, false, ""},
 }
 
 TestItem[] mixed_items =
 {
-    {1, "mixed", SORT_BY_COLOR, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, true, "color.wav"},
-    {2, "mixed", SORT_BY_SHAPE, "c_1.png", "s_2.png", RESP_SHAPE, RESP_COLOR, false, "shape.wav"},
-    {3, "mixed", SORT_BY_COLOR, "c_1.png", "s_1.png", RESP_COLOR, RESP_SHAPE, true, "color.wav"},
 }
 
 void
@@ -108,4 +95,21 @@ setup_order(TaskOrder order) {
         postswitch_items[i].type = order == COLOR_FIRST ? SORT_BY_SHAPE : SORT_BY_COLOR;
         i++;
     }
+}
+
+int load_stimuli()
+{
+    int ret;
+    string dir = stimuli_dir();
+    ret = prac_items.load(dir + "prac_items.csv", true, 1);
+    if (ret != OK)
+        return ret;
+    ret = preswitch_items.load(dir + "preswitch_items.csv", true, 1);
+    if (ret != OK)
+        return ret;
+    ret = postswitch_items.load(dir + "postswitch_items.csv", true, 1);
+    if (ret != OK)
+        return ret;
+    ret = mixed_items.load(dir + "mixed_items.csv", true, 1);
+    return ret;
 }

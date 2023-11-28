@@ -2,43 +2,43 @@
 const string PRE_PRAC_INSTRUCTION_COLOR =
    M"In welk bakje hoort het middelste figuurtje?\n"
     "Links of rechts?\n"
-    "Kijk naar de kleur.";
+    "Kijk naar de <b>kleur</b>.";
 const string PRE_PRAC_INSTRUCTION_SHAPE =
    M"In welk bakje hoort het middelste figuurtje?\n"
     "Links of rechts?\n"
-    "Kijk naar de vorm.";
+    "Kijk naar de <b>vorm</b>.";
 
 const string PRAC_COLOR_REDO = PRE_PRAC_INSTRUCTION_COLOR;
 const string PRAC_SHAPE_REDO = PRE_PRAC_INSTRUCTION_SHAPE;
 
 const string PRE_SWITCH_INSTRUCTION_COLOR_Y =
-   M"Kijk naar de kleur.";
+   M"Kijk naar de <b>kleur</b>.";
 const string PRE_SWITCH_INSTRUCTION_SHAPE_Y =
-   M"Kijk naar de vorm.";
+   M"Kijk naar de <b>vorm</b>.";
 
 const string PRE_SWITCH_INSTRUCTION_COLOR_O =
-   M"Sorteer de figuurtjes naar kleur.";
+   M"Sorteer de figuurtjes naar <b>kleur</b>.";
 const string PRE_SWITCH_INSTRUCTION_SHAPE_O =
-   M"Sorteer de figuurtjes naar vorm.";
+   M"Sorteer de figuurtjes naar <b>vorm</b>.";
 
 const string POST_SWITCH_INSTRUCTION_COLOR_Y =
    M"De regels zijn nu anders.\n"
-    "Kijk nu naar de kleur.";
+    "Kijk nu naar de <b>kleur</b>.";
 const string POST_SWITCH_INSTRUCTION_SHAPE_Y =
    M"De regels zijn nu anders.\n"
-    "Kijk nu naar de vorm.";
+    "Kijk nu naar de <b>vorm</b>.";
     
 const string POST_SWITCH_INSTRUCTION_COLOR_O =
    M"De regels zijn nu anders.\n"
-    "Sorteer de figuurtjes naar de kleur.";
+    "Sorteer de figuurtjes naar de <b>kleur</b>.";
 
 const string POST_SWITCH_INSTRUCTION_SHAPE_O =
    M"De regels zijn nu anders.\n"
-    "Sorteer de figuurtjes naar de vorm.";
+    "Sorteer de figuurtjes naar de <b>vorm</b>.";
 
 const string MIXED_INSTRUCTION =
    M"Nu gaan de regels door elkaar.\n"
     "Hoor je 'kleur' en zie je een zwarte rand?\n"
-    "Dan sorteer je de figuurtjes naar kleur.\n"
-    "Hoor je vorm en zie je geen zwarte rand?\n"
-    "Dan sorteer je naar vorm.";
+    "Dan sorteer je de figuurtjes naar <b>kleur</b>.\n"
+    "Hoor je 'vorm' en zie je geen zwarte rand?\n"
+    "Dan sorteer je naar <b>vorm</b>.";

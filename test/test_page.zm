@@ -253,7 +253,7 @@ Page test_page
         control.disable_buttons();
         control.disable_keys();
         control.enable_button(BUTTON_0, RESPONSE_NO);
-        control.enable_button(BUTTON_1, RESPONSE_YES);
+        control.enable_button(BUTTON_2, RESPONSE_YES);
         control.enable_key(KEY_Shift_L, RESPONSE_NO);
         control.enable_key(KEY_Shift_R, RESPONSE_YES);
     }

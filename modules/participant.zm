@@ -1,0 +1,38 @@
+/******************************************************************************\
+FILE:           participant.zm
+AUTHOR:         John Doe <jdoe@silly-research.org>
+ADAPTED BY:     -
+
+DESCRIPTION:
+
+Participant record preparation:
+- initialization of fixed participant record attributes
+- checking participant record attributes
+
+\******************************************************************************/
+
+const string LINGUAL = "lingual";
+
+// Initializes fixed participant record attributes, if applicable.
+// All attributes must have a definition in the database.
+// This function is optional.
+int create_participant_fields()
+{
+    return OK;
+}
+
+
+// Checks value of required participant record attributes, if applicable.
+// This function is optional.
+int check_participant_fields()
+{
+    // Check if attributes "lingual" is set.
+    if (!expdb.participant.has_field(LINGUAL)) return ERROR;
+
+    // Also check if attributes "sex" and "birthdate" are valid.
+    string bilingual = expdb.participant.get_enum_field(LINGUAL);
+    if (bilingual != "MONO" && bilingual != "BI")
+        return ERROR;
+
+    return OK;
+}

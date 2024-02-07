@@ -25,7 +25,7 @@ import stimuli;
 import shuffle;
 import output;
 import test_page;
-import instructions;
+import instructions_cn;
 
 bool skip_mixed()
 {

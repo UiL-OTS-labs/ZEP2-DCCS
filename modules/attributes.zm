@@ -1,0 +1,64 @@
+
+enum Lingual {
+    NOT_SET,
+    MONO,
+    BI
+};
+   
+
+FieldDefInit[] participant_attribute_defs =
+{
+    {
+        // Attribute id.
+        "lingual",
+ 
+        // Attribute type.
+        FIELD_TYPE_ENUM,
+ 
+        // Attribute description.
+        "Whether the participant is mono- or bilingual",
+ 
+        // Set if attribute may identify a person.
+        false,
+ 
+        // Set if attribute may contain sensitive information.
+        false,
+ 
+        // Set to exclude attribute from export.
+        false,
+ 
+        // Set to show attribute in zepman record list.
+        true,
+ 
+        // Set if attribute is required for experiment.
+        true,
+ 
+        // Enumerator list.
+        "NOT_SET|MONO|BI"
+    },
+}
+
+// Attribute definitions to be used for session records. Session record
+// attributes serve as experiment script arguments.
+FieldDefInit[] session_attribute_defs =
+{
+}
+
+
+// Attribute definitions to be used for group records. Group record attributes
+// could be used to specify the levels of between-subjects factors.
+FieldDefInit[] group_attribute_defs =
+{
+}
+
+
+// Attribute definitions to be used for experiment records.
+FieldDefInit[] experiment_attribute_defs =
+{
+}
+
+
+// Attribute definitions to be used for researcher records.
+FieldDefInit[] researcher_attribute_defs =
+{
+}

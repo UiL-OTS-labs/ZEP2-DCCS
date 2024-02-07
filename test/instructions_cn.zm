@@ -1,0 +1,38 @@
+
+const string PRE_PRAC_INSTRUCTION_COLOR =
+   M"中间的图形属于哪个盒子?\n"
+    "左还是右?\n"
+    "请看它的<b>颜色</b>。";
+const string PRE_PRAC_INSTRUCTION_SHAPE =
+   M"中间的图形属于哪个盒子?\n"
+    "左还是右?\n"
+    "请看它的<b>形状</b>。";
+
+const string PRAC_COLOR_REDO = PRE_PRAC_INSTRUCTION_COLOR;
+const string PRAC_SHAPE_REDO = PRE_PRAC_INSTRUCTION_SHAPE;
+
+const string PRE_SWITCH_INSTRUCTION_COLOR_Y =
+   M"请看它的<b>颜色</b>。";
+const string PRE_SWITCH_INSTRUCTION_SHAPE_Y =
+   M"请看它的<b>形状</b>。";
+
+const string PRE_SWITCH_INSTRUCTION_COLOR_O =
+   M"请根据<b>颜色</b>对图形进行分类。";
+const string PRE_SWITCH_INSTRUCTION_SHAPE_O =
+   M"请根据<b>形状</b>对图形进行分类。";
+
+const string POST_SWITCH_INSTRUCTION_COLOR_Y =
+   M"现在规则变成请根据<b>颜色</b>对图形进行分类。";
+const string POST_SWITCH_INSTRUCTION_SHAPE_Y =
+   M"现在规则变成请根据<b>形状</b>对图形进行分类。";
+    
+const string POST_SWITCH_INSTRUCTION_COLOR_O =
+   M"现在规则变成请根据<b>颜色</b>对图形进行分类。";
+
+const string POST_SWITCH_INSTRUCTION_SHAPE_O =
+   M"现在规则变成请根据<b>形状</b>对图形进行分类。";
+
+const string MIXED_INSTRUCTION =
+   M"现在的规则是：\n"
+    "当你看到外面黑色边框时，请根据<b>颜色</b>对图形进行分类。\n"
+    "没有黑色边框时，请根据<b>形状</b>对图形进行分类。";

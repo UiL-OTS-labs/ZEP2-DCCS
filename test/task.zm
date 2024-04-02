@@ -59,6 +59,16 @@ Block task
             terminate "Unexpected random number";
         }
         setup_order(order);
+
+    }
+
+    TransientPart test_jump_mixed
+    {
+        on_event:entry() { 
+            if (have_flag("jump-mixed")) {
+                mixed.enter();
+            }
+        }
     }
 
     Part instructions_1
@@ -66,6 +76,7 @@ Block task
         on_event:entry()
         {
 //            pause_page.set_text_size(1000, 600);
+
             if (order == COLOR_FIRST)
                 pause_page.set_text(
                     PRE_PRAC_INSTRUCTION_COLOR,
@@ -78,7 +89,6 @@ Block task
             pause_page.action(this);
             control.enable_all_buttons();
         }
-
     }
 
     TransientPart skip_redo_instruction
@@ -395,9 +405,6 @@ Block task
 
         on_event:entry()
         {
-            // Randomize test item table.
-            if (shuffle_mixed_items() != OK) terminate;
-
             num_cycles = mixed_items.size;
 
             // Prepare test page: progress bar enabled, feedback and prompt

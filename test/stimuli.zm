@@ -97,6 +97,110 @@ setup_order(TaskOrder order) {
     }
 }
 
+void
+append_test_item(TestItem[] items, TestItem item)
+{
+    items.size = items.size + 1;
+    items[items.size-1] = item;
+}
+
+
+// Global variables for the setup_mixed_stimuli function as zep makes it a
+// bit hard to have local scope arrays.
+TestItem[] g_shape = {};
+TestItem[] g_color = {};
+int[] g_num_color = {3,3,4};
+int[] g_num_shape = {3,3,4};
+
+int pop_number(int[] numbers)
+{
+    int number = numbers[numbers.size-1];
+    numbers.size = numbers.size - 1;
+    return number;
+}
+
+TestItem
+pop_test_item(TestItem[] items)
+{
+    TestItem item = items[items.size-1];
+    items.size = items.size - 1;
+    return item;
+}
+
+
+void
+setup_mixed_stimuli() {
+
+    int i = 0;
+
+    // number of consecutive color/shape items.
+
+    g_num_color.shuffle(0, -1);
+    g_num_shape.shuffle(0, -1);
+
+    mixed_items.shuffle(0, -1);
+
+    while (i < mixed_items.size) {
+        TestItem item = mixed_items[i];
+        if (item.type == SORT_BY_SHAPE) {
+            append_test_item(g_shape, item);
+        }
+        else if (item.type == SORT_BY_COLOR) {
+            append_test_item(g_color, item);
+        }
+        i++;
+    }
+
+    // clear items.
+    mixed_items.size = 0;
+
+    int start_with_color = random(0, 2);
+
+    if (start_with_color == 1) {
+        // start with color
+        while (g_shape.size > 0 || g_color.size > 0) {
+            int num_color = pop_number(g_num_color);
+            int num_shape = pop_number(g_num_shape);
+            i = 0;
+            while (i < num_color) {
+                TestItem col_item = pop_test_item(g_color);
+                append_test_item(mixed_items, col_item);
+                i++;
+            }
+
+            i = 0;
+            while(i < num_shape) {
+                TestItem col_item = pop_test_item(g_shape);
+                append_test_item(mixed_items, col_item);
+                i++;
+            }
+        }
+    }
+    else if (start_with_color == 0) {
+        // start with shape
+        while (g_shape.size > 0 || g_color.size > 0) {
+            int num_color = pop_number(g_num_color);
+            int num_shape = pop_number(g_num_shape);
+            i = 0;
+            while(i < num_shape) {
+                TestItem col_item = pop_test_item(g_shape);
+                append_test_item(mixed_items, col_item);
+                i++;
+            }
+            
+            i = 0;
+            while (i < num_color) {
+                TestItem col_item = pop_test_item(g_color);
+                append_test_item(mixed_items, col_item);
+                i++;
+            }
+        }
+    }
+    else {
+        println("Oops not starting with color nor shape, consult the labstaff");
+    }
+}
+
 int load_stimuli()
 {
     int ret;
@@ -108,8 +212,12 @@ int load_stimuli()
     if (ret != OK)
         return ret;
     ret = postswitch_items.load(dir + "postswitch_items.csv", true, 1);
+
+    // The mixed items we shuffle and reorder manually 
+    ret = mixed_items.load(dir + "mixed_items.csv", true, 1);
     if (ret != OK)
         return ret;
-    ret = mixed_items.load(dir + "mixed_items.csv", true, 1);
+    setup_mixed_stimuli();
+
     return ret;
 }

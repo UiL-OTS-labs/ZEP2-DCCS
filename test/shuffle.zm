@@ -36,10 +36,11 @@ int shuffle_postswitch_items()
     return OK;
 }
 
-int shuffle_mixed_items()
-{
-    mixed_items.shuffle(0, -1);
-
-    return OK;
-}
+// Don't shuffle mixed items, their setup is more elaborate
+// int shuffle_mixed_items()
+// {
+//     mixed_items.shuffle(0, -1);
+// 
+//     return OK;
+// }
 
